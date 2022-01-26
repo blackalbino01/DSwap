@@ -1,0 +1,21 @@
+{
+  "name": "swap-api",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@openzeppelin/contracts": "^4.4.2",
+    "@truffle/hdwallet-provider": "^2.0.1",
+    "@uniswap/v3-periphery": "^1.4.0"
+  },
+  "devDependencies": {
+    "dotenv": "^14.3.0",
+    "ethereumjs-wallet": "^1.0.2"
+  }
+}
