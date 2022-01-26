@@ -21,10 +21,13 @@ contract Swap {
 
     function swap(address _tokenIn, address _tokenOut,uint256 amountIn) external returns (uint256 amountOut) {        
         // msg.sender must approve this contract
-        // Transfer the specified amount of DAI to this contract.        
+
+        // Transfer the specified amount of _tokenIn to this contract.        
         TransferHelper.safeTransferFrom(_tokenIn, msg.sender, address(this), amountIn);
+        
         // Approve the router to spend tokenIn.        
         TransferHelper.safeApprove(_tokenIn, address(swapRouter), amountIn);
+
         // Naively set amountOutMinimum to 0. In production, use an oracle or other data source to choose a safer value for amountOutMinimum.        
         // We also set the sqrtPriceLimitx96 to be 0 to ensure we swap our exact input amount.        
         ISwapRouter.ExactInputSingleParams memory params = ISwapRouter.ExactInputSingleParams({                

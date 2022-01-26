@@ -12,23 +12,18 @@ module.exports = async function(callback) {
 		const owner = accounts[0]
 
 		const trader = accounts[1]
-
-		console.log(owner);
-
-		const swap = await Swap.new('0xE592427A0AEce92De3Edee1F18E0157C05861564');
+		const swap = await Swap.new('0xE592427A0AEce92De3Edee1F18E0157C05861564', {from: owner});
 		const swapRouter = await SwapRouter.new('0x1F98431c8aD98523631AE4a59f267346ea31F984', '0xc778417E063141139Fce010982780140Aa0cD5Ab',{from: owner});
 		
 		const DAI = '0x6B175474E89094C44Da98b954EedeAC495271d0F';
 		const WETH9 = '0xc778417E063141139Fce010982780140Aa0cD5Ab';
-		const amountIn = 20;
+		const amountIn = web3.utils.toWei('0.4', 'ether');
 
-		const token = new web3.eth.Contract(IERC20.abi, DAI);
+		const token = new web3.eth.Contract(IERC20.abi, WETH9);
 
-		const tx = await token.methods.approve(swap.address, amountIn).send({ from: trader, gas: 50000, gasPrice: 0 });
+		await token.methods.approve(swap.address, amountIn).send({ from: owner});
 
-  	console.log(tx);
-
-		const test = await swap.swap(Dai, WETH9, amountIn);
+		const test = await swap.swap(WETH9, DAI, amountIn, {from: owner});
 		console.log(test);
 	}
 
