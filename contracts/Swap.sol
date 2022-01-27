@@ -1,10 +1,9 @@
 // SPDX-License-Identifier: MIT
-pragma solidity ^0.8.0;
+pragma solidity >=0.7.6;
 pragma abicoder v2;
 
 import "@uniswap/v3-periphery/contracts/interfaces/ISwapRouter.sol";
 import "@uniswap/v3-periphery/contracts/libraries/TransferHelper.sol";
-import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
 
 
 contract Swap {
@@ -19,7 +18,7 @@ contract Swap {
         swapRouter = _swapRouter;    
     }
 
-    function swap(address _tokenIn, address _tokenOut,uint256 amountIn) external returns (uint256 amountOut) {        
+    function swap(address _tokenIn, address _tokenOut,uint256 amountIn) public returns (uint256 amountOut) {        
         // msg.sender must approve this contract
 
         // Transfer the specified amount of _tokenIn to this contract.        
